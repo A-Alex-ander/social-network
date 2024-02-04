@@ -1,13 +1,17 @@
 import React from 'react';
 import s from "./Posts.module.css"
 
-const Posts = () => {
+type PostsType = {
+    message: string
+    likeCounts: string
+}
+const Posts: React.FC<PostsType> = ({message,likeCounts}) => {
     return (
         <div className={s.item}>
-            <img src="https://carso.ru/images/honda_1.png" />
-            post 1
+            <img src="https://carso.ru/images/honda_1.png"/>
+            {message}
             <div>
-                <span>Like</span>
+                <span>{likeCounts}</span>
             </div>
         </div>
 
