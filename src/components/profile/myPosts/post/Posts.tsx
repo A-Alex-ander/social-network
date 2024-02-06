@@ -3,15 +3,15 @@ import s from "./Posts.module.css"
 
 type PostsType = {
     message: string
-    likeCounts: string
+    likesCounts: string
 }
-const Posts: React.FC<PostsType> = ({message,likeCounts}) => {
+const Posts: React.FC<PostsType> = ({message, likesCounts}) => {
     return (
         <div className={s.item}>
             <img src="https://carso.ru/images/honda_1.png"/>
             {message}
             <div>
-                <span>{likeCounts}</span>
+                <span>{likesCounts}</span>
             </div>
         </div>
 
