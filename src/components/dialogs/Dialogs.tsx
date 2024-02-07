@@ -9,53 +9,49 @@ type DialogItemType = {
 }
 
 type MessageType = {
-    id:number
-    message:string
+    id: number
+    message: string
 }
 
-type dialogsDataType = {
-    id:number
-    name:string
+type dialogsType = {
+    id: number
+    name: string
 }
 
-type messageDataType = {
-    id:number
-    message:string
+type messageType = {
+    id: number
+    message: string
 }
 
 
 const Dialogs = () => {
-    let dialogsData:dialogsDataType[] = [
-        {id:1,name:'Alexandr'},
-        {id:2,name:'Vladislav'},
-        {id:3,name:'Dima'},
-        {id:4,name:'Efim'},
-        {id:5,name:'John'},
+    let dialogs: dialogsType[] = [
+        {id: 1, name: 'Alexandr'},
+        {id: 2, name: 'Vladislav'},
+        {id: 3, name: 'Dima'},
+        {id: 4, name: 'Efim'},
+        {id: 5, name: 'John'},
     ]
 
-    let messageData:messageDataType[] = [
-        {id:1,message:'Hi'},
-        {id:2,message:'How are you ?'},
-        {id:3,message:'Good'},
-        {id:4,message:'Great'},
-        {id:5,message:'Badly'},
+    let message: messageType[] = [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How are you ?'},
+        {id: 3, message: 'Good'},
+        {id: 4, message: 'Great'},
+        {id: 5, message: 'Badly'},
     ]
+
+    let dialogsElement = dialogs.map(el => <DialogItem id={el.id} name={el.name}/>)
+
+    let messagesElement = message.map(el => <Message message={el.message} id={el.id}/>)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem id={dialogsData[0].id} name={dialogsData[0].name}/>
-                <DialogItem id={dialogsData[1].id} name={dialogsData[1].name}/>
-                <DialogItem id={dialogsData[2].id} name={dialogsData[2].name}/>
-                <DialogItem id={dialogsData[3].id} name={dialogsData[3].name}/>
-                <DialogItem id={dialogsData[4].id} name={dialogsData[4].name}/>
-
+                {dialogsElement}
             </div>
             <div className={s.messages}>
-                <Message message={messageData[0].message} id={messageData[0].id}/>
-                <Message message={messageData[1].message} id={messageData[1].id}/>
-                <Message message={messageData[2].message} id={messageData[2].id}/>
-                <Message message={messageData[3].message} id={messageData[3].id}/>
-                <Message message={messageData[4].message} id={messageData[4].id}/>
+                {messagesElement}
             </div>
 
         </div>
@@ -77,7 +73,7 @@ const DialogItem: React.FC<DialogItemType> = ({id, name}) => {
 // };
 
 
-const Message:React.FC<MessageType> = ({message,id}) => {
+const Message: React.FC<MessageType> = ({message, id}) => {
     return <div className={s.message}>{message}</div>
 }
 /*Тоже новая версия типизации */
