@@ -3,11 +3,12 @@ import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 import Message from "./message/Message";
 import DialogItem from "./dialogItem/DialogItem";
-import {dialogsType, messageType} from "../../index";
+import {DialogType, MessageType} from "../../redux/state/state";
+
 
 type DialogsType = {
-    dialogs:dialogsType[]
-    message: messageType[]
+    dialogs:DialogType[]
+    message: MessageType[]
 }
 const Dialogs:React.FC<DialogsType> = ({dialogs,message}) => {
 

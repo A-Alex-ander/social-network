@@ -2,14 +2,14 @@ import React from 'react';
 import s from "./Posts.module.css"
 
 
-export type PostsType = {
+export type PostType = {
     id: number
     message: string
     likesCounts: string
 
 }
 
-const Posts: React.FC<PostsType> = ({id, message, likesCounts}) => {
+const Posts: React.FC<PostType> = ({id, message, likesCounts}) => {
 
     return (
         <div className={s.item}>

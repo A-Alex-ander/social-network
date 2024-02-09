@@ -1,9 +1,11 @@
 import React from 'react';
 import s from "./MyPosts.module.css"
-import Posts, {PostsType} from "./post/Posts";
+
+import Posts, {PostType} from "./post/Posts";
+
 
 export type MyPostsType = {
-    posts:PostsType[]
+    posts:PostType[]
 }
 
 const MyPosts:React.FC<MyPostsType> = ({posts}) => {
