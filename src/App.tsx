@@ -2,26 +2,35 @@ import React from 'react';
 import './App.css';
 import Header from "./components/header/Header";
 import NavBar from "./components/navBar/NavBar";
-import Profile from "./components/profile/Profile";
 import Dialogs from "./components/dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
+import {dialogsType, messageType} from "./index";
+import {PostsType} from "./components/profile/myPosts/post/Posts";
+import Profile from "./components/profile/Profile";
 
-
-function App() {
+type AppType= {
+    dialogs:dialogsType[]
+    posts: PostsType[]
+    message: messageType[]
+}
+const App:React.FC<AppType> = ({dialogs,posts,message})=> {
     return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <Header/>
-                <NavBar/>
-                <div className='app-wrapper-content'>
-                    <Route path={"/dialogs"} component={Dialogs}/>
-                    <Route path={"/profile"} component={Profile}/>
-                    <Route path={"/news"} component={Profile}/>
-                    <Route path={"/music"} component={Profile}/>
-                    <Route path={"/settings"} component={Profile}/>
+        <div>
+            <BrowserRouter>
+                <div className="app-wrapper">
+                    <Header/>
+                    <NavBar/>
+                    <div className='app-wrapper-content'>
+                        <Route path={"/dialogs"} render={()=> <Dialogs dialogs={dialogs} message={message}/>}/>
+                        <Route path={"/profile"} render={()=> <Profile posts={posts}/>}/>
+                        <Route path={"/news"} component={Profile}/>
+                        <Route path={"/music"} component={Profile}/>
+                        <Route path={"/settings"} component={Profile}/>
+                    </div>
                 </div>
-            </div>
-        </BrowserRouter>
+            </BrowserRouter>
+        </div>
+
 
 
     );
