@@ -6,6 +6,7 @@ import DialogItem from "./dialogItem/DialogItem";
 import {DialogType, MessageType} from "../../redux/state/state";
 
 
+
 type DialogsType = {
     dialogs:DialogType[]
     message: MessageType[]
