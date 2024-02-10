@@ -6,8 +6,10 @@ export type PostType = {
     id: number
     message: string
     likesCounts: string
-
+    addPost?:(postMessage:string)=>void
 }
+
+
 
 const Posts: React.FC<PostType> = ({id, message, likesCounts}) => {
 

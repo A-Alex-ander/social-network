@@ -51,6 +51,30 @@ let state: RootStateType = {
 }
 
 
+
+export let addPost = (postMessage:string)=> {
+    debugger
+    let newPost:PostType = {id:3, message: postMessage, likesCounts:'0' }
+    state.profilePage.posts.push(newPost)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
 // let posts: PostType[] = [
 //     {id: 1, message: 'Hi how are you', likesCounts: '10'},
