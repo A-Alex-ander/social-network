@@ -16,6 +16,7 @@ const MyPosts:React.FC<MyPostsType> = ({posts,addPost}) => {
         debugger
         if(newPostElement.current) {
             addPost(newPostElement.current.value)
+            newPostElement.current.value=""
 
         }
     }

@@ -1,4 +1,5 @@
 import {PostType} from "../../components/profile/myPosts/post/Posts";
+import {rerenderEntireTree} from "../../render";
 
 export type MessageType = {
     id: number
@@ -49,13 +50,11 @@ let state: RootStateType = {
         ]
     }
 }
-
-
-
 export let addPost = (postMessage:string)=> {
     debugger
     let newPost:PostType = {id:3, message: postMessage, likesCounts:'0' }
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }
 
 
