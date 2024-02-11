@@ -6,25 +6,30 @@ import Posts, {PostType} from "./post/Posts";
 
 export type MyPostsType = {
     posts:PostType[]
-    addPost:(postMessage:string)=>void
+    addPost:()=>void
+    newPostText: string
+    updateNewPostText:(newText:string)=>void
 }
 
-const MyPosts:React.FC<MyPostsType> = ({posts,addPost}) => {
+const MyPosts:React.FC<MyPostsType> = ({posts,addPost,newPostText,updateNewPostText}) => {
     let postsElement = posts.map(el=> <Posts id={el.id} message={el.message} likesCounts={el.likesCounts} addPost={el.addPost}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     let addPostHandler = () => {
-        debugger
-        if(newPostElement.current) {
-            addPost(newPostElement.current.value)
-            newPostElement.current.value=""
+            addPost()
+        }
 
+
+    let onPostChange = ()=> {
+        let text = newPostElement.current?.value
+        if(text) {
+            updateNewPostText(text)
         }
     }
     return (
             <div>
                 My posts
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onPostChange}  ref={newPostElement} value={newPostText}/>
                     <button onClick={addPostHandler}>Add post</button>
                 </div>
                 <div className={s.posts}>

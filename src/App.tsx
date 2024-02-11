@@ -9,9 +9,10 @@ import {addPost, RootStateType} from "./redux/state/state";
 
 type AppType= {
     state:RootStateType
-    addPost:(postMessage:string)=>void
+    addPost:()=>void
+    updateNewPostText:(newText:string)=>void
 }
-const App:React.FC<AppType> = ({state,addPost})=> {
+const App:React.FC<AppType> = ({state,addPost,updateNewPostText})=> {
     return (
         <div>
                 <div className="app-wrapper">
@@ -19,7 +20,7 @@ const App:React.FC<AppType> = ({state,addPost})=> {
                     <NavBar/>
                     <div className='app-wrapper-content'>
                         <Route path={"/dialogs"} render={()=> <Dialogs dialogs={state.dialogsPage.dialogs} message={state.dialogsPage.messages}/>}/>
-                        <Route path={"/profile"} render={()=> <Profile posts={state.profilePage.posts} addPost={addPost}/>}/>
+                        <Route path={"/profile"} render={()=> <Profile profilePage= {state.profilePage} addPost={addPost} updateNewPostText={updateNewPostText}/>}/>
                         <Route path={"/news"} component={Profile}/>
                         <Route path={"/music"} component={Profile}/>
                         <Route path={"/settings"} component={Profile}/>

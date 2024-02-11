@@ -12,17 +12,18 @@ export type DialogType = {
 }
 
 
- export type ProfilePageType = {
-    posts:PostType[]
- }
+export type ProfilePageType = {
+    posts: PostType[]
+    newPostText: string
+}
 
 export type MessagePageType = {
-    dialogs:DialogType[]
-    messages:MessageType[]
+    dialogs: DialogType[]
+    messages: MessageType[]
 }
 
 export type RootStateType = {
-    profilePage:ProfilePageType
+    profilePage: ProfilePageType
     dialogsPage: MessagePageType
 
 }
@@ -31,7 +32,8 @@ let state: RootStateType = {
         posts: [
             {id: 1, message: 'Hi how are you', likesCounts: '10'},
             {id: 2, message: 'It`s my first post', likesCounts: '20'},
-        ]
+        ],
+        newPostText: "it-kamasutra"
     },
     dialogsPage: {
         dialogs: [
@@ -41,7 +43,7 @@ let state: RootStateType = {
             {id: 4, name: 'Efim'},
             {id: 5, name: 'John'},
         ],
-        messages:[
+        messages: [
             {id: 1, message: 'Hi'},
             {id: 2, message: 'How are you ?'},
             {id: 3, message: 'Good'},
@@ -50,29 +52,17 @@ let state: RootStateType = {
         ]
     }
 }
-export let addPost = (postMessage:string)=> {
-    debugger
-    let newPost:PostType = {id:3, message: postMessage, likesCounts:'0' }
+export let addPost = () => {
+    let newPost: PostType = {id: 3, message: state.profilePage.newPostText, likesCounts: '0'}
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText=''
     rerenderEntireTree(state)
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export let updateNewPostText = (newText:string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree(state)
+}
 
 //
 // let posts: PostType[] = [
