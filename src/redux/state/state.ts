@@ -1,5 +1,4 @@
 import {PostType} from "../../components/profile/myPosts/post/Posts";
-import {rerenderEntireTree} from "../../render";
 
 export type MessageType = {
     id: number
@@ -27,6 +26,9 @@ export type RootStateType = {
     dialogsPage: MessagePageType
 
 }
+
+
+
 let state: RootStateType = {
     profilePage: {
         posts: [
@@ -52,16 +54,25 @@ let state: RootStateType = {
         ]
     }
 }
+
+let rerenderEntireTree = ()=> {
+    console.log("State changed")
+}
+
 export let addPost = () => {
     let newPost: PostType = {id: 3, message: state.profilePage.newPostText, likesCounts: '0'}
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText=''
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 export let updateNewPostText = (newText:string) => {
     state.profilePage.newPostText = newText
-    rerenderEntireTree(state)
+    rerenderEntireTree()
+}
+
+export const subscribe = (observer:()=>void)=>{
+rerenderEntireTree = observer
 }
 
 //
