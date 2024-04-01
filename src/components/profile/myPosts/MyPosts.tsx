@@ -1,42 +1,54 @@
-import React, {useRef} from 'react';
+import React, {FC, useRef} from 'react';
 import s from "./MyPosts.module.css"
-
 import Posts, {PostType} from "./post/Posts";
+import {ActionType} from "../../redux/state";
 
 
-export type MyPostsType = {
-    posts:PostType[]
-    addPost:()=>void
+type MyPostType = {
+    posts: PostType[]
     newPostText: string
-    updateNewPostText:(newText:string)=>void
+    dispatch:(action:ActionType)=>void
 }
-
-const MyPosts:React.FC<MyPostsType> = ({posts,addPost,newPostText,updateNewPostText}) => {
-    let postsElement = posts.map(el=> <Posts id={el.id} message={el.message} likesCounts={el.likesCounts} addPost={el.addPost}/>)
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
-    let addPostHandler = () => {
-            addPost()
-        }
+const MyPosts: FC<MyPostType> = ({posts,  newPostText, dispatch}) => {
 
 
-    let onPostChange = ()=> {
-        let text = newPostElement.current?.value
-        if(text) {
-            updateNewPostText(text)
+    const postsElements = posts.map(el => {
+        return (
+            <Posts id={el.id} message={el.message} likesCounts={el.likesCounts}/>
+        )
+    })
+
+    // let newPostElement = React.createRef();
+    // дальше при добавлении в addPostHandler и попытки прочитать value, ошибка, поэтому делаем по другому
+    let newPostElement = useRef<HTMLTextAreaElement>(null)
+    const addPostHandler = () => {
+            dispatch({type:'ADD-POST'})
+
+        // alert(newPostElement.current?.value) другой вариант записи
+    }
+
+    const onPostChange = () => {
+        if (newPostElement.current !== null) {
+            let action:ActionType = {
+                type:'UPDATE-NEW-POST-TEXT',newText:newPostElement.current.value
+            }
+            dispatch(action)
         }
     }
     return (
+
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
             <div>
-                My posts
+                <div><textarea onChange={onPostChange} ref={newPostElement} value={newPostText}/></div>
                 <div>
-                    <textarea onChange={onPostChange}  ref={newPostElement} value={newPostText}/>
                     <button onClick={addPostHandler}>Add post</button>
                 </div>
-                <div className={s.posts}>
-                    {postsElement}
-
-                </div>
             </div>
+            <div className={s.posts}>
+                {postsElements}
+            </div>
+        </div>
 
 
     );

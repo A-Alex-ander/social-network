@@ -8,22 +8,10 @@ export type DialogItemType = {
     name: string
 }
 
-
 const DialogItem: React.FC<DialogItemType> = ({id, name}) => {
     return <div className={s.dialog + " " + s.active}>
         <NavLink to={"/dialogs/" + id}>{name}</NavLink>
     </div>
 }
-/* Другая версия типизации(новее)*/
-// const DialogItem = ({ id, name }: DialogItemType): JSX.Element => {
-//     return (
-//         <div className={s.dialog + " " + s.active}>
-//             <NavLink to={"/dialogs/" + id}>{name}</NavLink>
-//         </div>
-//     );
-// };
-
-
-
 
 export default DialogItem

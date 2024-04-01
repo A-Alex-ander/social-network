@@ -1,6 +1,5 @@
-import React from "react";
+import React, {useRef} from "react";
 import s from './../Dialogs.module.css'
-import {NavLink} from "react-router-dom";
 
 
 export type MessageType = {
@@ -8,12 +7,21 @@ export type MessageType = {
     message: string
 }
 
-const Message: React.FC<MessageType> = ({message, id}) => {
-    return <div className={s.message}>{message}</div>
+
+export const Message: React.FC<MessageType> = ({message, id}) => {
+
+    let newMessageElement = useRef<HTMLTextAreaElement>(null)
+    const addMessage = () => {
+        alert(newMessageElement.current?.value)
+    }
+    return (
+        <div>
+            <div className={s.message}></div>
+            <textarea ref={newMessageElement}>{message}</textarea>
+            <button onClick={addMessage}>+</button>
+
+        </div>
+    )
 }
-/*Тоже новая версия типизации */
-// const Message = ({message}:MessageType):JSX.Element => {
-//     return <div className={s.message}>{message}</div>
-// }
 
 export default Message

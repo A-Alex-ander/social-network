@@ -1,30 +1,33 @@
-import React from "react";
+import React, {FC} from "react";
 import s from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
-import Message from "./message/Message";
-import DialogItem from "./dialogItem/DialogItem";
-import {DialogType, MessageType} from "../../redux/state/state";
-
+import DialogItem, {DialogItemType} from "./dialogItem/DialogItem";
+import {Message, MessageType} from "./message/Message";
+import {DialogPageType} from "../redux/state";
 
 
 type DialogsType = {
-    dialogs:DialogType[]
-    message: MessageType[]
+    state:DialogPageType
 }
-const Dialogs:React.FC<DialogsType> = ({dialogs,message}) => {
+const Dialogs:FC<DialogsType> = ({state}) => {
 
 
-    let dialogsElement = dialogs.map(el => <DialogItem id={el.id} name={el.name}/>)
-
-    let messagesElement = message.map(el => <Message  id={el.id} message={el.message}/>)
-
+    const dialogsElements = state.dialogs.map(el => {
+        return (
+            <DialogItem id={el.id} name={el.name}/>
+        )
+    })
+    const messagesElements = state.messages.map(el => {
+        return (
+            <Message id={el.id} message={el.message}/>
+        )
+    })
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {dialogsElement}
+                {dialogsElements}
             </div>
             <div className={s.messages}>
-                {messagesElement}
+                {messagesElements}
             </div>
 
         </div>

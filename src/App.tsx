@@ -2,31 +2,34 @@ import React from 'react';
 import './App.css';
 import Header from "./components/header/Header";
 import NavBar from "./components/navBar/NavBar";
+import Profile from "./components/profile/Profile";
 import Dialogs from "./components/dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import Profile from "./components/profile/Profile";
-import { RootStateType} from "./redux/state/state";
+import {ActionType, RootStateType} from "./components/redux/state";
 
-type AppType= {
-    state:RootStateType
-    addPost:()=>void
-    updateNewPostText:(newText:string)=>void
+
+export type AppType = {
+    state: RootStateType
+    dispatch: (action: ActionType) => void
 }
-const App:React.FC<AppType> = ({state,addPost,updateNewPostText})=> {
+
+function App({state, dispatch}: AppType): JSX.Element {
     return (
-        <div>
-                <div className="app-wrapper">
-                    <Header/>
-                    <NavBar/>
-                    <div className='app-wrapper-content'>
-                        <Route path={"/dialogs"} render={()=> <Dialogs dialogs={state.dialogsPage.dialogs} message={state.dialogsPage.messages}/>}/>
-                        <Route path={"/profile"} render={()=> <Profile profilePage= {state.profilePage} addPost={addPost} updateNewPostText={updateNewPostText}/>}/>
-                        <Route path={"/news"} component={Profile}/>
-                        <Route path={"/music"} component={Profile}/>
-                        <Route path={"/settings"} component={Profile}/>
-                    </div>
+        <BrowserRouter>
+            <div className="app-wrapper">
+                <Header/>
+                <NavBar/>
+                <div className='app-wrapper-content'>
+                    <Route path={"/dialogs"} render={() => <Dialogs state={state.dialogsPage}/>}/>
+                    <Route path={"/profile"} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
+                    <Route path={"/news"} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
+                    <Route path={"/music"} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
+                    <Route path={"/settings"} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
                 </div>
-        </div>
+            </div>
+        </BrowserRouter>
+
+
     );
 }
 
