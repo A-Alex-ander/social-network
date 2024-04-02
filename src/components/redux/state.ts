@@ -75,6 +75,13 @@ let store: StoreType = {
         }
     }
 }
+
+
+export const addPostAC=() => ({type:'ADD-POST'} as const)
+
+
+export const onPostChangeAC=(newText:string) =>({type:'UPDATE-NEW-POST-TEXT',newText:newText} as const)
+
 export type ActionType = AddPostActionType | UpdateNewPostTextActionType
 type AddPostActionType = {
     type: 'ADD-POST'
@@ -83,6 +90,8 @@ type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string
 }
+
+
 
 
 export default store;
