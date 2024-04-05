@@ -5,22 +5,23 @@ import NavBar from "./components/navBar/NavBar";
 import Profile from "./components/profile/Profile";
 import Dialogs from "./components/dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {ActionType, RootStateType} from "./components/redux/state";
+import {ActionType, RootStateType, StoreType} from "./components/redux/state";
 
 
 export type AppType = {
     state: RootStateType
     dispatch: (action: ActionType) => void
+    store:StoreType
 }
 
-function App({state, dispatch}: AppType): JSX.Element {
+function App({state, dispatch,store}: AppType): JSX.Element {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <NavBar/>
                 <div className='app-wrapper-content'>
-                    <Route path={"/dialogs"} render={() => <Dialogs state={state.dialogsPage}/>}/>
+                    <Route path={"/dialogs"} render={() => <Dialogs store={store}/>}/>
                     <Route path={"/profile"} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
                     <Route path={"/news"} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
                     <Route path={"/music"} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
